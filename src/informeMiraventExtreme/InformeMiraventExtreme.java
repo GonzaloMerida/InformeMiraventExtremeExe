@@ -4,12 +4,15 @@
  */
 package informeMiraventExtreme;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.plaf.FileChooserUI;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -73,6 +76,11 @@ public class InformeMiraventExtreme extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextAreaInfo);
 
         jButtonRuta.setText("Elegir ruta");
+        jButtonRuta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRutaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -157,7 +165,7 @@ public class InformeMiraventExtreme extends javax.swing.JFrame {
 
             jTextAreaInfo.append("\nGenerando informe...");
             //Transformación al archivo pdf
-            JasperExportManager.exportReportToPdfFile(objetoInforme, "src\\informeVideojuegos.pdf");
+            JasperExportManager.exportReportToPdfFile(objetoInforme, jLabelRutaSeleccionada.getText());
             System.out.println("PDF generado");
             jTextAreaInfo.append("\nInforme generado correctamente.");
 
@@ -165,6 +173,20 @@ public class InformeMiraventExtreme extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_jButtonGeneraActionPerformed
+
+    private void jButtonRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRutaActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); // Solo permite seleccionar directorios
+
+        int returnValue = fileChooser.showOpenDialog(null);
+
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            // Si el usuario ha seleccionado un directorio
+            File selectedFile = fileChooser.getSelectedFile();
+            jLabelRutaSeleccionada.setText(selectedFile.getAbsolutePath()+"informeVideojuegos.pdf"); // Establece la ruta seleccionada en el jLabelRutaSeleccionada
+        }
+
+    }//GEN-LAST:event_jButtonRutaActionPerformed
 
     /**
      * @param args the command line arguments

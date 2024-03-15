@@ -176,14 +176,13 @@ public class InformeMiraventExtreme extends javax.swing.JFrame {
 
     private void jButtonRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRutaActionPerformed
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); // Solo permite seleccionar directorios
 
         int returnValue = fileChooser.showOpenDialog(null);
 
         if (returnValue == JFileChooser.APPROVE_OPTION) {
-            // Si el usuario ha seleccionado un directorio
+            
             File selectedFile = fileChooser.getSelectedFile();
-            jLabelRutaSeleccionada.setText(selectedFile.getAbsolutePath()+"informeVideojuegos.pdf"); // Establece la ruta seleccionada en el jLabelRutaSeleccionada
+            jLabelRutaSeleccionada.setText(selectedFile.getAbsolutePath()); 
         }
 
     }//GEN-LAST:event_jButtonRutaActionPerformed
